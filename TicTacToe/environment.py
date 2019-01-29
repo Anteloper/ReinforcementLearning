@@ -54,11 +54,14 @@ class environment():
             self.ended = True
             return
 
+    def drawBoard(self):
+        for i in range(0, 7, 3):
+            print(str(self.board[i]) + " " + str(self.board[i+1]) + " " + str(self.board[i+1]))
 
 def main():
     e = environment()
     e.checkAllWinningPaths(1)
-    print(e.getState())
+    e.drawBoard()
 
 main()
 

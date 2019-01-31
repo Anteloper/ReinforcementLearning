@@ -1,11 +1,15 @@
 
 class environment:
-    def __init__(self):
-        self.board = [0 for i in range(9)]
+    def __init__(self, boardString="000000000"):
+        board = []
+        for i in boardString:
+            board.append(int(i))
+        self.board = board
         self.x = 1
         self.o = 2
         self.winner = None
         self.ended = False
+        self.isOver()
 
     def isEmpty(self, i):
         return self.board[i] == 0
@@ -22,11 +26,11 @@ class environment:
         return state
 
     def isOver(self):
-        if not "0" in self.getState():
-            return True
+        if "0" not in self.getState():
+            self.ended = True
 
         self.checkAllWinningPaths(1)
-        self.checkAllWinningPaths(0)
+        self.checkAllWinningPaths(2)
         return self.ended
 
     def checkAllWinningPaths(self, sym):
@@ -57,16 +61,4 @@ class environment:
     def drawBoard(self):
         for i in range(0, 7, 3):
             print(str(self.board[i]) + " " + str(self.board[i+1]) + " " + str(self.board[i+1]))
-
-def main():
-    e = environment()
-    e.checkAllWinningPaths(1)
-    e.drawBoard()
-
-main()
-
-
-
-
-
-
+        print("\n")

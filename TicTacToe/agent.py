@@ -1,6 +1,6 @@
 import numpy as np
 
-class Agent:
+class agent:
 
 
     def __init__(self, eps=0.1, alpha=0.5):
@@ -20,13 +20,12 @@ class Agent:
 
     def takeAction(self, env):
         r = np.random.rand()
-        move = None
         if r < self.eps:
             move = self.getRandomAction(env.board)
+            env.board[move] = self.sym
         else:
-            move = self.getBestMove(env.board)
-        env.board[move] = self.sym
-
+            move = self.getBestMove(env)
+            env.board[move] = self.sym
 
     def updateStateHistory(self, state):
         self.stateHistory.append(state)
@@ -40,7 +39,7 @@ class Agent:
 
     def getRandomAction(self, board):
         possibleSpots = []
-        for i in range(board):
+        for i in range(len(board)):
             if board[i] == 0:
                 possibleSpots.append(i)
 
@@ -51,7 +50,7 @@ class Agent:
         bestValue = -1
         bestState = None
         move = None
-        for i in range(env.board):
+        for i in range(len(env.board)):
             if env.board[i] == 0:
                 env.board[i] = self.sym
                 state = env.getState()

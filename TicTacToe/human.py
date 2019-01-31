@@ -8,13 +8,15 @@ class human:
 
     def takeAction(self, env):
         while True:
-            move = raw_input("Enter index of your next move, 0-8")
-            if(env.isEmpty(move)== 0):
+            move = int(raw_input("Enter index of your next move, 0-8: "))
+            if env.isEmpty(move):
                 env.board[move] = self.sym
-            print("Move already taken")
+                return
+            else:
+                print("Move already taken")
 
     def update(self, env):
         pass
 
-    def update_state_history(self, s):
+    def updateStateHistory(self, s):
         pass

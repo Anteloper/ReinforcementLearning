@@ -10,6 +10,7 @@ class human:
         while True:
             move = int(raw_input("Enter index of your next move, 0-8: "))
             if env.isEmpty(move):
+                print("Playing human move")
                 env.board[move] = self.sym
                 return
             else:

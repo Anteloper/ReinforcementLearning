@@ -1,10 +1,9 @@
 
 class environment:
     def __init__(self, boardString="000000000"):
-        board = []
+        self.board = []
         for i in boardString:
-            board.append(int(i))
-        self.board = board
+            self.board.append(int(i))
         self.x = 1
         self.o = 2
         self.winner = None
@@ -22,7 +21,7 @@ class environment:
     def getState(self):
         state = ""
         for i in self.board:
-            state += str(self.board[i])
+            state += str(i)
         return state
 
     def isOver(self):
@@ -32,6 +31,9 @@ class environment:
         self.checkAllWinningPaths(1)
         self.checkAllWinningPaths(2)
         return self.ended
+
+    def playMove(self, index, symbol):
+        self.board[index] = symbol
 
     def checkAllWinningPaths(self, sym):
         #Check row winners
@@ -59,6 +61,15 @@ class environment:
             return
 
     def drawBoard(self):
+        aestheticBoard = []
+        for i in self.board:
+            if i == 0:
+                aestheticBoard.append("_")
+            elif i == 1:
+                aestheticBoard.append("X")
+            else:
+                aestheticBoard.append("O")
+
         for i in range(0, 7, 3):
-            print(str(self.board[i]) + " " + str(self.board[i+1]) + " " + str(self.board[i+1]))
+            print(str(aestheticBoard[i]) + " " + str(aestheticBoard[i+1]) + " " + str(aestheticBoard[i+2]))
         print("\n")

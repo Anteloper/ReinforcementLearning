@@ -5,7 +5,6 @@ from human import human
 def playGame(p1, p2, env, draw=0):
     currentPlayer = None
     while not env.isOver():
-
         if currentPlayer == p1:
             currentPlayer = p2
         else:
@@ -53,7 +52,6 @@ def generateAllStates():
 
     allEnvironments = []
 
-
     for i in allStates:
         allEnvironments.append(environment(i))
 
@@ -66,9 +64,12 @@ def main():
 
     allEnvs = generateAllStates()
 
-    p1.setV(initializeV(allEnvs, 1))
+    p1V = initializeV(allEnvs, 1)
+    p1.setV(p1V)
     p1.setSymbol(1)
-    p2.setV(initializeV(allEnvs, 2))
+
+    p2V = initializeV(allEnvs, 2)
+    p2.setV(p2V)
     p2.setSymbol(2)
 
     for i in range(1000):
@@ -78,12 +79,12 @@ def main():
 
     hum = human()
     hum.setSymbol(2)
+    p1.setVerbose(True)
 
     while True:
         playGame(p1, hum, environment(), 2)
-        answer = input("Play again? [Y/n]: ")
-        if answer and answer.lower()[0] == 'n':
-            break
+        print("Game Over\n\n\n")
+
 
 
 if __name__ == "__main__":
